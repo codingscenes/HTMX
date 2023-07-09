@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .pointer {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <a class="pointer" data-hx-post="http://localhost:8000/click">Click Me!</a>
+    <button
+      hx-post="http://localhost:8000/click"
+      hx-trigger="click"
+      hx-target="#parent-div"
+      hx-swap="outerHTML"
+    >
+      Click Me!
+    </button>
+    <div id="parent-div">Replace me</div>
+    <hr />
+    <input
+      type="text"
+      name="q"
+      hx-get="http://localhost:8000/trigger_delay"
+      hx-trigger="keyup changed delay:1000ms"
+      hx-target="#search-results"
+      placeholder="Search..."
+    />
+    <div id="search-results"></div>
+    <hr />
+    <div hx-get="http://localhost:8000/news" hx-trigger="every 2s"></div>
+    <hr />
+    <div
+      hx-get="http://localhost:8000/news"
+      hx-trigger="load delay:1s"
+      hx-swap="outerHTML"
+    ></div>
+
+    <hr />
+    <form hx-post="http://localhost:8000/store">
+      <input
+        id="title"
+        name="title"
+        type="text"
+        hx-post="http://localhost:8000/validate"
+        hx-trigger="change"
+        hx-sync="closest form:abort"
+      />
+      <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  </body>
+</html>
